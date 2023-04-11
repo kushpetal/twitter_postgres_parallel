@@ -24,7 +24,7 @@ CREATE TABLE users (
     location TEXT,
     description TEXT,
     url TEXT,
-    withheld_in_countries VARCHAR(2)[],
+    withheld_in_countries VARCHAR(2)[]
 );
 
 /*
@@ -62,8 +62,8 @@ CREATE INDEX tweets_index_withheldincountries ON tweets USING gin(withheld_in_co
 CREATE TABLE tweet_urls (
     id_tweets BIGINT,
     url TEXT,
-    PRIMARY KEY (id_tweets, id_urls),
-    FOREIGN KEY (id_tweets) REFERENCES tweets(id_tweets) DEFERRABLE INITIALLY DEFERRED,
+    PRIMARY KEY (id_tweets, url),
+    FOREIGN KEY (id_tweets) REFERENCES tweets(id_tweets) DEFERRABLE INITIALLY DEFERRED
 );
 
 
@@ -71,7 +71,7 @@ CREATE TABLE tweet_mentions (
     id_tweets BIGINT,
     id_users BIGINT,
     PRIMARY KEY (id_tweets, id_users),
-    FOREIGN KEY (id_tweets) REFERENCES tweets(id_tweets) DEFERRABLE INITIALLY DEFERRED,
+    FOREIGN KEY (id_tweets) REFERENCES tweets(id_tweets) DEFERRABLE INITIALLY DEFERRED
 );
 CREATE INDEX tweet_mentions_index ON tweet_mentions(id_users);
 
@@ -89,7 +89,7 @@ CREATE TABLE tweet_media (
     id_tweets BIGINT,
     url TEXT,
     type TEXT,
-    PRIMARY KEY (id_tweets, id_urls),
+    PRIMARY KEY (id_tweets, url),
     FOREIGN KEY (id_tweets) REFERENCES tweets(id_tweets) DEFERRABLE INITIALLY DEFERRED
 );
 
