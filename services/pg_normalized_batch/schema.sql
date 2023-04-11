@@ -48,7 +48,7 @@ CREATE TABLE tweets (
     state_code VARCHAR(2),
     lang TEXT,
     place_name TEXT,
-    geo geometry,
+    geo geometry
 
     -- NOTE:
     -- We do not have the following foreign keys because they would require us
